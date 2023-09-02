@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.halitakca.jetpackcomposetomvmm.ui.theme.JetpackComposeToMVMMTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
 
-                    Sayfa()
+                    AnaSayfa()
 
                 }
             }
@@ -37,23 +38,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Sayfa(){
+fun AnaSayfa(){
     val sayac = remember { mutableStateOf(0) }
 
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = "Home Page", fontSize =50.sp)
+
         Text(text = "Sayaç: ${sayac.value}")
-        
+
         Button(onClick = { sayac.value += 5}) {
             Text(text = "Sayacı arttır.")
         }
-    }
 
+        Button(onClick = {}) {
+            Text(text = "Go to Page A")
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JetpackComposeToMVMMTheme {
-        Sayfa()
+        AnaSayfa()
     }
 }
