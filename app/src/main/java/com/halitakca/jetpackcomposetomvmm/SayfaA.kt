@@ -1,5 +1,6 @@
 package com.halitakca.jetpackcomposetomvmm
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,7 +26,12 @@ fun SayfaA(navController: NavController) {
         Text(text = "Page A", fontSize = 50.sp)
 
         Button(onClick = {
-            navController.navigate("page_b")
+            navController.navigate("page_b"){
+                popUpTo("page_a"){
+                    inclusive = true
+                    Log.e("page_a pop","Page A is Popped")
+                }
+            }
         }) {
             Text(text = "Go to Page B")
         }
