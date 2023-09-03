@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.google.gson.Gson
 import com.halitakca.jetpackcomposetomvmm.ui.theme.JetpackComposeToMVMMTheme
 
 class MainActivity : ComponentActivity() {
@@ -51,6 +52,7 @@ fun SayfaGecisleri(){
 /*      composable("page_a"){
             SayfaA(navController = navController,)
         } */
+/*
         composable("page_a/{name}/{yas}/{boy}",
         arguments = listOf(
             navArgument("name"){type = NavType.StringType},
@@ -62,6 +64,16 @@ fun SayfaGecisleri(){
             val yas = it.arguments?.getInt("yas")!!
             val boy = it.arguments?.getFloat("boy")!!
             SayfaA(navController = navController, name = name, yas = yas, boy = boy)
+        }
+ */
+        composable("page_a/{kisiObject}",
+            arguments = listOf(
+            navArgument("kisiObject"){type = NavType.StringType},
+            )
+        ){
+            val json = it.arguments?.getString("kisiObject")
+            val obj = Gson().fromJson(json,Kisiler::class.java)
+            SayfaA(navController = navController, kisiObject = obj)
         }
         composable("page_b"){
             SayfaB(navController = navController)
@@ -85,7 +97,9 @@ fun AnaSayfa(navController: NavController){
         }
 
         Button(onClick = {
-            navController.navigate("page_a/Halit/22/190")
+            val kisi = Kisiler("Halit",22,1.90f,false)
+            val kisiJson = Gson().toJson(kisi)
+            navController.navigate("page_a/$kisiJson")
         }) {
             Text(text = "Go to Page A")
         }
