@@ -11,9 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun SayfaA() {
+fun SayfaA(navController: NavController) {
     val sayac = remember { mutableStateOf(0) }
 
     Column(
@@ -23,8 +24,15 @@ fun SayfaA() {
     ) {
         Text(text = "Page A", fontSize = 50.sp)
 
-        Button(onClick = {}) {
+        Button(onClick = {
+            navController.navigate("page_b")
+        }) {
             Text(text = "Go to Page B")
+        }
+        Button(onClick = {
+            navController.popBackStack()
+        }) {
+            Text(text = "Go Back")
         }
     }
 }

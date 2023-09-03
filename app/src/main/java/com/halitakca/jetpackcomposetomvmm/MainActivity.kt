@@ -17,6 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.halitakca.jetpackcomposetomvmm.ui.theme.JetpackComposeToMVMMTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,9 +32,7 @@ class MainActivity : ComponentActivity() {
             JetpackComposeToMVMMTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-
-                    AnaSayfa()
-
+                    SayfaGecisleri()
                 }
             }
         }
@@ -38,7 +40,24 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AnaSayfa(){
+fun SayfaGecisleri(){
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "homepage"){
+        composable("homepage"){
+            AnaSayfa(navController = navController)
+        }
+        composable("page_a"){
+            SayfaA(navController = navController)
+        }
+        composable("page_b"){
+            SayfaB(navController = navController)
+        }
+    }
+
+}
+
+@Composable
+fun AnaSayfa(navController: NavController){
     val sayac = remember { mutableStateOf(0) }
 
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
@@ -50,7 +69,9 @@ fun AnaSayfa(){
             Text(text = "Sayacı arttır.")
         }
 
-        Button(onClick = {}) {
+        Button(onClick = {
+            navController.navigate("page_a")
+        }) {
             Text(text = "Go to Page A")
         }
     }
@@ -60,6 +81,6 @@ fun AnaSayfa(){
 @Composable
 fun DefaultPreview() {
     JetpackComposeToMVMMTheme {
-        AnaSayfa()
+        SayfaGecisleri()
     }
 }
