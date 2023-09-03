@@ -18,8 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.halitakca.jetpackcomposetomvmm.ui.theme.JetpackComposeToMVMMTheme
 
@@ -46,8 +48,20 @@ fun SayfaGecisleri(){
         composable("homepage"){
             AnaSayfa(navController = navController)
         }
-        composable("page_a"){
-            SayfaA(navController = navController)
+/*      composable("page_a"){
+            SayfaA(navController = navController,)
+        } */
+        composable("page_a/{name}/{yas}/{boy}",
+        arguments = listOf(
+            navArgument("name"){type = NavType.StringType},
+            navArgument("yas"){type = NavType.IntType},
+            navArgument("boy"){type = NavType.FloatType}
+        )
+        ){
+            val name = it.arguments?.getString("name")!!
+            val yas = it.arguments?.getInt("yas")!!
+            val boy = it.arguments?.getFloat("boy")!!
+            SayfaA(navController = navController, name = name, yas = yas, boy = boy)
         }
         composable("page_b"){
             SayfaB(navController = navController)
@@ -71,7 +85,7 @@ fun AnaSayfa(navController: NavController){
         }
 
         Button(onClick = {
-            navController.navigate("page_a")
+            navController.navigate("page_a/Halit/22/190")
         }) {
             Text(text = "Go to Page A")
         }

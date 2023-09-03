@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun SayfaA(navController: NavController) {
+fun SayfaA(navController: NavController,name: String,yas: Int, boy:Float) {
     val sayac = remember { mutableStateOf(0) }
 
     Column(
@@ -24,6 +24,9 @@ fun SayfaA(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Page A", fontSize = 50.sp)
+        Text(text = name)
+        Text(text = yas.toString())
+        Text(text = boy.toString())
 
         Button(onClick = {
             navController.navigate("page_b"){
