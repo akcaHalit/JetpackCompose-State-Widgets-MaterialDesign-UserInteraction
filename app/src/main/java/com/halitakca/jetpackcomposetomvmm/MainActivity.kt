@@ -1,5 +1,6 @@
 package com.halitakca.jetpackcomposetomvmm
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -11,6 +12,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -86,8 +89,29 @@ fun AnaSayfa(navController: NavController){
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun Anasayfa2(){
+
+    Scaffold(
+        content = {
+
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                Log.e("HomePage2","FAB clicked")
+            },
+                backgroundColor = Color.Red,
+                content = {
+                    Icon(painter = painterResource(id = R.drawable.ekle_resim),
+                        contentDescription ="Açıklama",
+                        tint = Color.White )
+                }
+            )
+        }
+    )
+
+    /*
     var tf = remember { mutableStateOf("") }
     var veri = remember { mutableStateOf("") }
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
@@ -100,6 +124,7 @@ fun Anasayfa2(){
             Text(text = "Veriyi Outlined Al")
         }
     }
+     */
 
 }
 
