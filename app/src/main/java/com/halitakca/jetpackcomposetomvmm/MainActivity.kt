@@ -5,16 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavType
@@ -93,9 +97,28 @@ fun AnaSayfa(navController: NavController){
 @Composable
 fun Anasayfa2(){
 
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(modifier = Modifier.size(100.dp).background(Color.Red)
+            .pointerInput(Unit){ detectTapGestures(
+                onTap = {
+                    Log.e("Box","Tıklandı")
+                },
+                onDoubleTap = {
+                    Log.e("Box","Çift Tıklandı")
+                },
+                onLongPress = {
+                    Log.e("Box","Uzun Tıklandı")
+                }
+            )
+            })
+            /*.clickable {
+                Log.e("Box","Box clickable")
+            })
+             */
+    }
+    /*
     Scaffold(
         content = {
-
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
@@ -106,11 +129,8 @@ fun Anasayfa2(){
                     Icon(painter = painterResource(id = R.drawable.ekle_resim),
                         contentDescription ="Açıklama",
                         tint = Color.White )
-                }
-            )
-        }
-    )
-
+                })})
+     */
     /*
     var tf = remember { mutableStateOf("") }
     var veri = remember { mutableStateOf("") }
