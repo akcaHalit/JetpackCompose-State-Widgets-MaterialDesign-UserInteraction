@@ -7,10 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +31,8 @@ class MainActivity : ComponentActivity() {
             JetpackComposeToMVMMTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    SayfaGecisleri()
+                   // SayfaGecisleri()
+                    Anasayfa2()
                 }
             }
         }
@@ -48,23 +46,7 @@ fun SayfaGecisleri(){
         composable("homepage"){
             AnaSayfa(navController = navController)
         }
-/*      composable("page_a"){
-            SayfaA(navController = navController,)
-        } */
-/*
-        composable("page_a/{name}/{yas}/{boy}",
-        arguments = listOf(
-            navArgument("name"){type = NavType.StringType},
-            navArgument("yas"){type = NavType.IntType},
-            navArgument("boy"){type = NavType.FloatType}
-        )
-        ){
-            val name = it.arguments?.getString("name")!!
-            val yas = it.arguments?.getInt("yas")!!
-            val boy = it.arguments?.getFloat("boy")!!
-            SayfaA(navController = navController, name = name, yas = yas, boy = boy)
-        }
- */
+
         composable("page_a/{kisiObject}",
             arguments = listOf(
             navArgument("kisiObject"){type = NavType.StringType},
@@ -85,7 +67,6 @@ fun SayfaGecisleri(){
 @Composable
 fun AnaSayfa(navController: NavController){
     val sayac = remember { mutableStateOf(0) }
-
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = "Home Page", fontSize =50.sp)
 
@@ -103,7 +84,53 @@ fun AnaSayfa(navController: NavController){
             Text(text = "Go to Page A")
         }
     }
+}
 
+@Composable
+fun Anasayfa2(){
+    var tf = remember { mutableStateOf("") }
+    var veri = remember { mutableStateOf("") }
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
+        TextField(value = tf.value, onValueChange = {tf.value = it})
+
+        OutlinedTextField(value = tf.value, onValueChange = {tf.value = it})
+        OutlinedButton(onClick = {
+            veri.value = tf.value
+        }) {
+            Text(text = "Veriyi Outlined Al")
+        }
+    }
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    JetpackComposeToMVMMTheme {
+        SayfaGecisleri()
+    }
+}
+/*       Nabigations:
+        composable("page_a"){
+            SayfaA(navController = navController,)
+        }
+*/
+/*
+        composable("page_a/{name}/{yas}/{boy}",
+        arguments = listOf(
+            navArgument("name"){type = NavType.StringType},
+            navArgument("yas"){type = NavType.IntType},
+            navArgument("boy"){type = NavType.FloatType}
+        )
+        ){
+            val name = it.arguments?.getString("name")!!
+            val yas = it.arguments?.getInt("yas")!!
+            val boy = it.arguments?.getFloat("boy")!!
+            SayfaA(navController = navController, name = name, yas = yas, boy = boy)
+        }
+ */
+
+/*              Life Cycle
     LaunchedEffect(key1 = true){
         Log.e("HomePage","Launch Effect")
     }
@@ -115,12 +142,4 @@ fun AnaSayfa(navController: NavController){
             Log.e("HomePage","Disposable Effect")
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    JetpackComposeToMVMMTheme {
-        SayfaGecisleri()
-    }
-}
+ */
