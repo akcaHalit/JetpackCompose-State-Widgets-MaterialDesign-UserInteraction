@@ -1,6 +1,7 @@
 package com.halitakca.jetpackcomposetomvmm
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -10,9 +11,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -102,6 +101,18 @@ fun AnaSayfa(navController: NavController){
             navController.navigate("page_a/$kisiJson")
         }) {
             Text(text = "Go to Page A")
+        }
+    }
+
+    LaunchedEffect(key1 = true){
+        Log.e("HomePage","Launch Effect")
+    }
+    SideEffect {
+        Log.e("HomePage","Side Effect")
+    }
+    DisposableEffect(Unit){
+        onDispose {
+            Log.e("HomePage","Disposable Effect")
         }
     }
 }
