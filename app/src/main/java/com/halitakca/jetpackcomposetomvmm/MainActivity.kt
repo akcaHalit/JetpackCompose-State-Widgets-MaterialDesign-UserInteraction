@@ -97,6 +97,27 @@ fun AnaSayfa(navController: NavController){
 @Composable
 fun Anasayfa2(){
 
+    val progressStatus = remember { mutableStateOf(false) }
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
+        if(progressStatus.value){
+            CircularProgressIndicator(color = Color.Black)
+        }
+        Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+            Button(onClick = {
+                progressStatus.value = true
+            }) {
+                Text(text = "Başla")
+            }
+            Button(onClick = {
+                progressStatus.value = false
+            }) {
+                Text(text = "Dur")
+            }
+        }
+    }
+
+
+    /*
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
         Box(modifier = Modifier.size(100.dp).background(Color.Red)
             .pointerInput(Unit){ detectTapGestures(
@@ -116,6 +137,7 @@ fun Anasayfa2(){
             })
              */
     }
+     */
     /*
     Scaffold(
         content = {
