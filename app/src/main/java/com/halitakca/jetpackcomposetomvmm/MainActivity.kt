@@ -101,7 +101,29 @@ fun AnaSayfa(navController: NavController){
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun Anasayfa2(){
+    val menuControl = remember { mutableStateOf(false) }
 
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
+            Box{
+                Button(onClick = {
+                    menuControl.value = true
+
+                }){ Text(text = "SHOW")}
+                DropdownMenu(expanded = menuControl.value,
+                    onDismissRequest = { menuControl.value = false }) {
+
+                    DropdownMenuItem(onClick = {
+                        Log.e("DropMenu","Delete")
+                    }) { Text(text = "Delete")}
+                    DropdownMenuItem(onClick = {
+                        Log.e("DropMenu","Update")
+                    }) { Text(text = "Update")}
+                }
+            }
+    }
+
+
+    /*
     val url = "https://www.geeksforgeeks.org/webview-in-android-using-jetpack-compose/"
     AndroidView(factory = {
         WebView(it).apply {
@@ -114,7 +136,8 @@ fun Anasayfa2(){
         }
     }, update = {
         it.loadUrl(url)
-    })
+    }
+     */
     /*
     val progressStatus = remember { mutableStateOf(false) }
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
