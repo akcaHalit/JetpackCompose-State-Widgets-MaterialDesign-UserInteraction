@@ -33,6 +33,7 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.google.gson.Gson
 import com.halitakca.jetpackcomposetomvmm.ui.theme.JetpackComposeToMVMMTheme
+import kotlin.math.absoluteValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,23 +102,35 @@ fun AnaSayfa(navController: NavController){
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun Anasayfa2(){
+    val list = listOf("Turkey","England","France","Italy")
+    val selectedIndex = remember { mutableStateOf(0) }
+
     val menuControl = remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally) {
             Box{
-                Button(onClick = {
-                    menuControl.value = true
-
-                }){ Text(text = "SHOW")}
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .size(100.dp, 50.dp)
+                        .clickable {
+                            menuControl.value = true
+                        }
+                    ) {
+                    Text(text = list[selectedIndex.value])
+                    Image(painter = painterResource(id = R.drawable.dropdown_menu), contentDescription = "description")
+                }
                 DropdownMenu(expanded = menuControl.value,
                     onDismissRequest = { menuControl.value = false }) {
 
-                    DropdownMenuItem(onClick = {
-                        Log.e("DropMenu","Delete")
-                    }) { Text(text = "Delete")}
-                    DropdownMenuItem(onClick = {
-                        Log.e("DropMenu","Update")
-                    }) { Text(text = "Update")}
+                    list.forEachIndexed{index, country ->
+                        DropdownMenuItem(onClick = {
+                            Log.e("DropMenu","Country selected")
+                            menuControl.value = false
+                            selectedIndex.value = index
+                        }) { Text(text = country)}
+                    }
+
                 }
             }
     }
